@@ -9,17 +9,26 @@ namespace MeusLivrosAPI.Controllers;
 public class LivroController : ControllerBase
 {
     private static List<Livro> livros = new List<Livro>();
+    private static int id = 0;
 
     [HttpGet]
-    public IEnumerable<Livro> GetLivro()
+    public IEnumerable<Livro> GetLivro([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
-        return livros;
+        return livros.Skip(skip).Take(take);
     }
 
     [HttpGet("{id}")]
-    public Livro? GetLivroPorId(int id)
+    public IActionResult GetLivroPorId(int id)
     {
-        return livros.FirstOrDefault(livro => livro.id == id);
+        var livro = livros.FirstOrDefault(livro => livro.id == id);
+        if (livro == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return Ok(livro);
+        }
     }
 
     [HttpPost]
@@ -27,10 +36,9 @@ public class LivroController : ControllerBase
     {
         try
         {
-            livro.id++;
+            livro.id = id++;
             livros.Add(livro);
-            Console.WriteLine(livro.Titulo);
-            return Ok();
+            return CreatedAtAction(nameof(GetLivroPorId), new { id = livro.id }, livro);
         }
         catch
         {

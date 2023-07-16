@@ -12,6 +12,8 @@ A fim de manter a organização do nosso projeto, vamos inserir uma pasta que co
 
 BadRequest(); -- STATUS 400
 Ok(); -- STATUS 200
+CreatedAtAction(); -- STATUS 201
+NotFound(); -- STATUS 404
 
 [ValidateAntiForgeryToken] é uma medida de segurança utilizada no ASP.NET para proteger contra ataques CSRF (Cross-Site Request Forgery).
 
@@ -27,3 +29,8 @@ Data Annotations As Data Annotations são uma forma de adicionar metadados e reg
 [EmailAddress]: Valida se uma propriedade é um endereço de e-mail válido.
 [RegularExpression]: Aplica uma expressão regular para validar o formato de uma propriedade.
 [Compare]: Compara o valor de uma propriedade com o valor de outra propriedade em um modelo.
+
+Paginação
+A paginação nos permite retornar trechos da nossa lista, em lugar de sua totalidade. Para aplicar esse conceito no .NET, utilizaremos os métodos .Skip() e Take().
+
+O método Skip() indica quantos elementos da lista pular, enquanto o Take() define quantos serão selecionados. Vamos conferir na prática como eles funcionam, no método RecuperaFilmes():
