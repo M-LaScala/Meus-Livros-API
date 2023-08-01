@@ -34,3 +34,24 @@ Paginação
 A paginação nos permite retornar trechos da nossa lista, em lugar de sua totalidade. Para aplicar esse conceito no .NET, utilizaremos os métodos .Skip() e Take().
 
 O método Skip() indica quantos elementos da lista pular, enquanto o Take() define quantos serão selecionados. Vamos conferir na prática como eles funcionam, no método RecuperaFilmes():
+
+Entitiy frame work
+
+Add-migration
+Update-database
+
+Newtonsoft.Json 
+para fazer conversão do tipo de data para inserir no banco
+
+[JsonConverter(typeof(CustomDateTimeConverter))]
+
+Ultilizando DTOS -> Data Transfer Object
+O modelo de banco de dados não deve ser exposto ao usuario
+
+Como abrir uma conexão entre a API e o banco de dados através do EntityFramework.
+Como gerar migrations com .NET 6 e mapear nosso objeto no banco de dados.
+O DbContext serve como ponte e para fazer operações no banco.
+Como injetar o DbContext em nosso controlador a fim de acessar o banco de dados.
+Como salvar as alterações no banco de dados através do método SaveChanges().
+DTOs nos ajudam a não deixar nosso modelo de banco de dados exposto.
+Como fazer conversões práticas entre diferentes tipos através do AutoMapper.
