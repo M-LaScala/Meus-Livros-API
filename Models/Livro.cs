@@ -39,4 +39,8 @@ public class Livro
     [MaxLength(5000)]
     public string? Review { get; set; }
 
+    public DateTime DataDeGravacao { get; set; } = DateTime.Now;
+
+    public DateTime? DataDeAlteracao { get; set; } = null;
+
 }
