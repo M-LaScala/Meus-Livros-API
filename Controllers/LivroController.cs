@@ -22,12 +22,23 @@ public class LivroController : ControllerBase
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// Obtem varios livros.
+    /// </summary>
+    /// <param name="skip">Pular</param>
+    /// <param name="take">Pegar</param>
+    /// <returns></returns>
     [HttpGet]
     public IEnumerable<ReadLivroDto> GetLivro([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take));
     }
 
+    /// <summary>
+    /// Obtem um livro pelo id.
+    /// </summary>
+    /// <param name="id">Id do livro</param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public IActionResult GetLivroPorId(int id)
     {
@@ -44,7 +55,7 @@ public class LivroController : ControllerBase
     }
 
     /// <summary>
-    /// Adiona um livro ao banco de dados
+    /// Adiona um livro.
     /// </summary>
     /// <param name="livroDto">Objeto com o campos necessarios para a criação um livro</param>
     /// <returns>IActionResult</returns>
@@ -57,9 +68,10 @@ public class LivroController : ControllerBase
         {
             // Mapeando o objeto recebido via jason para um objeto livro
             Livro livro = _mapper.Map<Livro>(livroDto);
+            livro.DataDeGravacao = DateTime.Now;
             _context.Livros.Add(livro);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetLivroPorId), new { id = livro.id }, livro);
+            return CreatedAtAction(nameof(GetLivroPorId), new { livro.id }, livro);
         }
         catch
         {
@@ -67,6 +79,12 @@ public class LivroController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Atualiza todo os campos do livro.
+    /// </summary>
+    /// <param name="id">Id do livro.</param>
+    /// <param name="livroDto">Objeto do livro.</param>
+    /// <returns></returns>
     [HttpPut("{id}")]
     public IActionResult AtualizaLivro(int id, [FromBody] UpdateLivroDto livroDto)
     {
@@ -75,11 +93,18 @@ public class LivroController : ControllerBase
         {
             return NotFound();
         }
+        livro.DataDeAlteracao = DateTime.Now;
         _mapper.Map(livroDto, livro);
         _context.SaveChanges();
         return NoContent();
     }
 
+    /// <summary>
+    /// Atualiza um campo especifico do livro.
+    /// </summary>
+    /// <param name="id">Id do livro.</param>
+    /// <param name="patch">Campo do livro.</param>
+    /// <returns></returns>
     [HttpPatch("{id}")]
     public IActionResult AtualizaLivroParcial(int id, JsonPatchDocument<UpdateLivroDto> patch)
     {
@@ -89,6 +114,7 @@ public class LivroController : ControllerBase
             return NotFound();
         }
 
+        livro.DataDeAlteracao = DateTime.Now;
         var livroParaAtualizar = _mapper.Map<UpdateLivroDto>(livro);
 
         patch.ApplyTo(livroParaAtualizar, ModelState);
@@ -103,6 +129,11 @@ public class LivroController : ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Apaga um livro.
+    /// </summary>
+    /// <param name="id">Id do livro.</param>
+    /// <returns></returns>
     [HttpDelete("{id}")]
     public IActionResult DeletaLivro(int id)
     {

@@ -4,6 +4,7 @@ namespace MeusLivrosAPI.Models;
 
 public class Livro
 {
+   
     [Key]
     [Required]
     public int id { get; internal set; }
@@ -39,8 +40,8 @@ public class Livro
     [MaxLength(5000)]
     public string? Review { get; set; }
 
-    public DateTime DataDeGravacao { get; set; } = DateTime.Now;
+    public DateTime? DataDeGravacao { get; set; }
 
-    public DateTime? DataDeAlteracao { get; set; } = null;
+    public DateTime? DataDeAlteracao { get; set; } 
 
 }

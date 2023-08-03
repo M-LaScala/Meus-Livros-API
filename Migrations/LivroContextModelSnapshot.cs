@@ -7,65 +7,72 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MeusLivrosAPI.Migrations;
-
-[DbContext(typeof(LivroContext))]
-partial class LivroContextModelSnapshot : ModelSnapshot
+namespace MeusLivrosAPI.Migrations
 {
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    [DbContext(typeof(LivroContext))]
+    partial class LivroContextModelSnapshot : ModelSnapshot
     {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
 #pragma warning disable 612, 618
-        modelBuilder
-            .HasAnnotation("ProductVersion", "7.0.9")
-            .HasAnnotation("Relational:MaxIdentifierLength", 64);
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-        modelBuilder.Entity("MeusLivrosAPI.Models.Livro", b =>
-            {
-                b.Property<int>("id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+            modelBuilder.Entity("MeusLivrosAPI.Models.Livro", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                b.Property<DateTime?>("AnoDePublicacao")
-                    .IsRequired()
-                    .HasColumnType("datetime(6)");
+                    b.Property<DateTime?>("AnoDePublicacao")
+                        .IsRequired()
+                        .HasColumnType("datetime(6)");
 
-                b.Property<string>("Autor")
-                    .HasMaxLength(50)
-                    .HasColumnType("varchar(50)");
+                    b.Property<string>("Autor")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                b.Property<string>("Editora")
-                    .HasMaxLength(50)
-                    .HasColumnType("varchar(50)");
+                    b.Property<DateTime?>("DataDeAlteracao")
+                        .HasColumnType("datetime(6)");
 
-                b.Property<string>("Genero")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("varchar(50)");
+                    b.Property<DateTime?>("DataDeGravacao")
+                        .HasColumnType("datetime(6)");
 
-                b.Property<bool?>("Lido")
-                    .IsRequired()
-                    .HasColumnType("tinyint(1)");
+                    b.Property<string>("Editora")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                b.Property<short?>("Nota")
-                    .IsRequired()
-                    .HasColumnType("smallint");
+                    b.Property<string>("Genero")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                b.Property<int>("QtdPaginas")
-                    .HasColumnType("int");
+                    b.Property<bool?>("Lido")
+                        .IsRequired()
+                        .HasColumnType("tinyint(1)");
 
-                b.Property<string>("Review")
-                    .HasMaxLength(5000)
-                    .HasColumnType("varchar(5000)");
+                    b.Property<short?>("Nota")
+                        .IsRequired()
+                        .HasColumnType("smallint");
 
-                b.Property<string>("Titulo")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("varchar(50)");
+                    b.Property<int>("QtdPaginas")
+                        .HasColumnType("int");
 
-                b.HasKey("id");
+                    b.Property<string>("Review")
+                        .HasMaxLength(5000)
+                        .HasColumnType("varchar(5000)");
 
-                b.ToTable("Livros");
-            });
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Livros");
+                });
 #pragma warning restore 612, 618
+        }
     }
 }

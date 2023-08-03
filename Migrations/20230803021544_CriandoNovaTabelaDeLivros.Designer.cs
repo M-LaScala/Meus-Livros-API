@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeusLivrosAPI.Migrations
 {
     [DbContext(typeof(LivroContext))]
-    [Migration("20230731235254_CriandoTabelaDeLivro")]
-    partial class CriandoTabelaDeLivro
+    [Migration("20230803021544_CriandoNovaTabelaDeLivros")]
+    partial class CriandoNovaTabelaDeLivros
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,12 @@ namespace MeusLivrosAPI.Migrations
                     b.Property<string>("Autor")
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime?>("DataDeAlteracao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataDeGravacao")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Editora")
                         .HasMaxLength(50)
