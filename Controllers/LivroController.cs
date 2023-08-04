@@ -13,6 +13,15 @@ namespace MeusLivrosAPI.Controllers;
 public class LivroController : ControllerBase
 {
 
+    /* Guia de retornos:
+     * 
+     * Ok() -> 200
+     * CreatedAtAction() -> 201
+     * BadRequest() -> 400 
+     * NotFound() -> 404
+     * 
+    */
+
     private LivroContext _context;
     private IMapper _mapper;
 
@@ -45,7 +54,7 @@ public class LivroController : ControllerBase
         var livro = _context.Livros.FirstOrDefault(livro => livro.id == id);
         if (livro == null)
         {
-            return NotFound();
+            return NotFound(); 
         }
 
         var livroDto = _mapper.Map<ReadLivroDto>(livro);
@@ -57,7 +66,7 @@ public class LivroController : ControllerBase
     /// <summary>
     /// Adiona um livro.
     /// </summary>
-    /// <param name="livroDto">Objeto com o campos necessarios para a criação um livro</param>
+    /// <param name="livroDto">Objeto com o campos necessarios para a criação de um livro</param>
     /// <returns>IActionResult</returns>
     /// <response code="201">Caso inserção seja feita com sucesso</response>
     [HttpPost]
@@ -80,7 +89,7 @@ public class LivroController : ControllerBase
     }
 
     /// <summary>
-    /// Atualiza todo os campos do livro.
+    /// Atualiza todos os campos do livro.
     /// </summary>
     /// <param name="id">Id do livro.</param>
     /// <param name="livroDto">Objeto do livro.</param>

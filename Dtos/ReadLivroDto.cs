@@ -4,6 +4,7 @@ namespace MeusLivrosAPI.Dtos
 {
     public class ReadLivroDto
     {
+        public  int Id { get; set; }
         public string Titulo { get; set; }
 
         public string? Autor { get; set; }
