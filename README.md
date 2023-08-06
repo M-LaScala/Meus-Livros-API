@@ -55,3 +55,7 @@ Como injetar o DbContext em nosso controlador a fim de acessar o banco de dados.
 Como salvar as alterações no banco de dados através do método SaveChanges().
 DTOs nos ajudam a não deixar nosso modelo de banco de dados exposto.
 Como fazer conversões práticas entre diferentes tipos através do AutoMapper.
+
+O Enttity consegue deduzir as Foregin keys atravez dos Modelos e a forma como aplicamos as relações.
+
+

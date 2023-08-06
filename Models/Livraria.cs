@@ -10,4 +10,7 @@ public class Livraria
 
     [Required(ErrorMessage = "O nome é obrigatorio!")]
     public string Nome { get; set; }
+
+    public int EnderecoId { get; set; }
+    public virtual Endereco Endereco {get; set;}
 }

@@ -10,8 +10,12 @@ public class LivrariaProfile : Profile
     {
         CreateMap<CreateLivrariaDto, Livraria>();
         CreateMap<UpdateLivrariaDto, Livraria>();
+        // Mapeando o objeto Endereco de ReadlivrariaDto para o Objeto Endereco de Livraria
+        CreateMap<Livraria, ReadLivrariaDto>().
+            ForMember(LivrariaDto => LivrariaDto.Endereco,
+            opt => opt.MapFrom(livraria => livraria.Endereco));
         CreateMap<Livraria, UpdateLivrariaDto>();
-        CreateMap<Livraria, ReadLivrariaDto>();
+
     }
 
 }

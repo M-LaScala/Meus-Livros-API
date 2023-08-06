@@ -31,9 +31,13 @@ builder.Services.AddSwaggerGen(c =>
 // Configura a conexão com o banco de dados a partir do appsettings.json.
 var connectionString = builder.Configuration.GetConnectionString("LivroConnection");
 
+
+// O lazy loading é uma técnica de carregamento de dados sob demanda,
+// o que significa que os dados relacionados a uma entidade são carregados somente quando forem acessados pela primeira vez,
+// em vez de carregar todos os dados relacionados imediatamente.
 // Adicionando conexão com o banco.
 builder.Services.AddDbContext<LivroContext>(opts =>
-    opts.UseMySql(connectionString, 
+    opts.UseLazyLoadingProxies().UseMySql(connectionString, 
     ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();

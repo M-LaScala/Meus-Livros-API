@@ -24,13 +24,11 @@ public class LivrariaController : ControllerBase
     /// <summary>
     /// Obtem varias livrarias.
     /// </summary>
-    /// <param name="skip">Pular</param>
-    /// <param name="take">Pegar</param>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<ReadLivrariaDto> GetLivrarias([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public IEnumerable<ReadLivrariaDto> GetLivrarias()
     {
-        return _mapper.Map<List<ReadLivrariaDto>>(_context.Livrarias.Skip(skip).Take(take));
+        return _mapper.Map<List<ReadLivrariaDto>>(_context.Livrarias.ToList());
     }
 
     /// <summary>
