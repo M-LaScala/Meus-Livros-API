@@ -2,5 +2,6 @@
 
 public class ReadLancamentoDto
 {
-    public int Id { get; set; }
+    public int LivroId { get; set; }
+    public int LivrariaId { get; set; }
 }

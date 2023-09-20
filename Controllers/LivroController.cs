@@ -36,11 +36,19 @@ public class LivroController : ControllerBase
     /// </summary>
     /// <param name="skip">Pular</param>
     /// <param name="take">Pegar</param>
+    /// <param name="nomeLivraria">Nome da livraria para o filtro.</param>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<ReadLivroDto> GetLivro([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public IEnumerable<ReadLivroDto> GetLivro([FromQuery] int skip = 0, 
+                                              [FromQuery] int take = 20,
+                                              [FromQuery] string? nomeLivraria = null)
     {
-        return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take).ToList());
+        if(nomeLivraria == null)
+        {
+            return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take).ToList());
+        }
+        return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take)
+            .Where(livro => livro.Lancamentos.Any(lancamento => lancamento.Livraria.Nome == nomeLivraria)).ToList());
     }
 
     /// <summary>

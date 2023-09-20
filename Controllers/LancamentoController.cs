@@ -36,20 +36,25 @@ public class LancamentoController : ControllerBase
     /// <summary>
     /// Obtem um lancamento pelo id.
     /// </summary>
-    /// <param name="id">Id do lancamento</param>
+    /// <param name="livroId">Id de um livro.</param>
+    /// <param name="livrariaId">Id de uma livraria.</param>
     /// <returns></returns>
-    [HttpGet("{id}")]
-    public IActionResult GetLancamentoPorId(int id)
+    [HttpGet("{livroId}/{livrariaId}")]
+    public IActionResult GetLancamentoPorId(int livroId, int livrariaId)
     {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
-        if (lancamento == null)
+        Lancamento lancamento = _context.Lancamento
+            .FirstOrDefault(lancamento => lancamento.LivroId == livroId &&
+                                          lancamento.LivrariaId == livrariaId);
+
+        if (lancamento != null)
         {
-            return NotFound();
+            ReadLancamentoDto lancamentoDto = _mapper.Map<ReadLancamentoDto>(lancamento);
+
+            return Ok(lancamentoDto);
         }
 
-        var lancamentoDto = _mapper.Map<ReadLancamentoDto>(lancamento);
-
-        return Ok(lancamentoDto);
+        return NotFound();
+        
     }
 
     /// <summary>
@@ -68,77 +73,14 @@ public class LancamentoController : ControllerBase
             Lancamento lancamento = _mapper.Map<Lancamento>(lancamentoDto);
             _context.Lancamento.Add(lancamento);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetLancamentoPorId), new { lancamento.Id }, lancamento);
+            return CreatedAtAction(nameof(GetLancamentoPorId), new 
+                   { livroId = lancamento.LivroId,
+                     livrariaId = lancamento.LivrariaId}, 
+                     lancamento);
         }
         catch
         {
             return BadRequest();
         }
-    }
-
-    /// <summary>
-    /// Atualiza todos os campos do lancamento.
-    /// </summary>
-    /// <param name="id">Id do lancamento.</param>
-    /// <param name="lancamentoDto">Objeto do lancamento.</param>
-    /// <returns></returns>
-    [HttpPut("{id}")]
-    public IActionResult AtualizaLancamento(int id, [FromBody] UpdateLancamentoDto lancamentoDto)
-    {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
-        if (lancamento == null)
-        {
-            return NotFound();
-        }
-        _mapper.Map(lancamentoDto, lancamento);
-        _context.SaveChanges();
-        return NoContent();
-    }
-
-    /// <summary>
-    /// Atualiza um campo especifico do lancamento.
-    /// </summary>
-    /// <param name="id">Id do lancamento.</param>
-    /// <param name="patch">Campo do lancamento.</param>
-    /// <returns></returns>
-    [HttpPatch("{id}")]
-    public IActionResult AtualizaLancamentoParcial(int id, JsonPatchDocument<UpdateLancamentoDto> patch)
-    {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
-        if (lancamento == null)
-        {
-            return NotFound();
-        }
-        var lancamentoParaAtualizar = _mapper.Map<UpdateLancamentoDto>(lancamento);
-
-        patch.ApplyTo(lancamentoParaAtualizar, ModelState);
-
-        if (!TryValidateModel(lancamentoParaAtualizar))
-        {
-            return ValidationProblem(ModelState);
-        }
-
-        _mapper.Map(lancamentoParaAtualizar, lancamento);
-        _context.SaveChanges();
-        return NoContent();
-    }
-
-    /// <summary>
-    /// Apaga um lancamento.
-    /// </summary>
-    /// <param name="id">Id do lancamento.</param>
-    /// <returns></returns>
-    [HttpDelete("{id}")]
-    public IActionResult DeletaLancamento(int id)
-    {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
-        if (lancamento == null)
-        {
-            return NotFound();
-        }
-
-        _context.Lancamento.Remove(lancamento);
-        _context.SaveChanges();
-        return NoContent();
     }
 }

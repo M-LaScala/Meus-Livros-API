@@ -3,6 +3,7 @@ using System;
 using MeusLivrosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeusLivrosAPI.Migrations
 {
     [DbContext(typeof(LivroContext))]
-    partial class LivroContextModelSnapshot : ModelSnapshot
+    [Migration("20230920004312_LivroId Nulo")]
+    partial class LivroIdNulo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,15 +45,21 @@ namespace MeusLivrosAPI.Migrations
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Lancamento", b =>
                 {
-                    b.Property<int?>("LivroId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("LivrariaId")
                         .HasColumnType("int");
 
-                    b.HasKey("LivroId", "LivrariaId");
+                    b.Property<int?>("LivroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("LivrariaId");
+
+                    b.HasIndex("LivroId");
 
                     b.ToTable("Lancamento");
                 });
@@ -134,15 +143,11 @@ namespace MeusLivrosAPI.Migrations
                 {
                     b.HasOne("MeusLivrosAPI.Models.Livraria", "Livraria")
                         .WithMany("Lancamentos")
-                        .HasForeignKey("LivrariaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LivrariaId");
 
                     b.HasOne("MeusLivrosAPI.Models.Livro", "Livro")
                         .WithMany("Lancamentos")
-                        .HasForeignKey("LivroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LivroId");
 
                     b.Navigation("Livraria");
 
@@ -154,7 +159,7 @@ namespace MeusLivrosAPI.Migrations
                     b.HasOne("MeusLivrosAPI.Models.Endereco", "Endereco")
                         .WithOne("Livraria")
                         .HasForeignKey("MeusLivrosAPI.Models.Livraria", "EnderecoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Endereco");

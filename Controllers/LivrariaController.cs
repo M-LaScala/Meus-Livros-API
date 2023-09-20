@@ -4,6 +4,8 @@ using MeusLivrosAPI.Dtos;
 using MeusLivrosAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace MeusLivrosAPI.Controllers;
 
@@ -26,9 +28,16 @@ public class LivrariaController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<ReadLivrariaDto> GetLivrarias()
+    public IEnumerable<ReadLivrariaDto> GetLivrarias([FromQuery] int? enderecoId = null)
     {
-        return _mapper.Map<List<ReadLivrariaDto>>(_context.Livrarias.ToList());
+        if (enderecoId == null)
+        {
+            return _mapper.Map<List<ReadLivrariaDto>>(_context.Livrarias.ToList());
+        }
+        // Permite colocar explicitamente uma consulta ao banco
+        return _mapper.Map<List<ReadLivrariaDto>>
+            (_context.Livrarias.FromSqlRaw($"select * from livrarias where EnderecoId = {enderecoId}").ToList());
+        
     }
 
     /// <summary>
