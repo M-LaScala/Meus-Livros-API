@@ -40,7 +40,7 @@ public class LivroController : ControllerBase
     [HttpGet]
     public IEnumerable<ReadLivroDto> GetLivro([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
-        return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take));
+        return _mapper.Map<List<ReadLivroDto>>(_context.Livros.Skip(skip).Take(take).ToList());
     }
 
     /// <summary>

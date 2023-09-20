@@ -10,7 +10,7 @@ namespace MeusLivrosAPI.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class LancamentoController
+public class LancamentoController : ControllerBase
 {
     private LivroContext _context;
     private IMapper _mapper;
@@ -41,7 +41,7 @@ public class LancamentoController
     [HttpGet("{id}")]
     public IActionResult GetLancamentoPorId(int id)
     {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.id == id);
+        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
         if (lancamento == null)
         {
             return NotFound();
@@ -65,10 +65,10 @@ public class LancamentoController
         try
         {
             // Mapeando o objeto recebido via jason para um objeto lancamento
-            Lancamento lancamento = _mapper.Map<Livro>(lancamentoDto);
-            _context.lancamento.Add(lancamento);
+            Lancamento lancamento = _mapper.Map<Lancamento>(lancamentoDto);
+            _context.Lancamento.Add(lancamento);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetLancamentoPorId), new { lancamento.id }, lancamento);
+            return CreatedAtAction(nameof(GetLancamentoPorId), new { lancamento.Id }, lancamento);
         }
         catch
         {
@@ -80,12 +80,12 @@ public class LancamentoController
     /// Atualiza todos os campos do lancamento.
     /// </summary>
     /// <param name="id">Id do lancamento.</param>
-    /// <param name="livroDto">Objeto do lancamento.</param>
+    /// <param name="lancamentoDto">Objeto do lancamento.</param>
     /// <returns></returns>
     [HttpPut("{id}")]
     public IActionResult AtualizaLancamento(int id, [FromBody] UpdateLancamentoDto lancamentoDto)
     {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.id == id);
+        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
         if (lancamento == null)
         {
             return NotFound();
@@ -104,7 +104,7 @@ public class LancamentoController
     [HttpPatch("{id}")]
     public IActionResult AtualizaLancamentoParcial(int id, JsonPatchDocument<UpdateLancamentoDto> patch)
     {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.id == id);
+        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
         if (lancamento == null)
         {
             return NotFound();
@@ -131,7 +131,7 @@ public class LancamentoController
     [HttpDelete("{id}")]
     public IActionResult DeletaLancamento(int id)
     {
-        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.id == id);
+        var lancamento = _context.Lancamento.FirstOrDefault(lancamento => lancamento.Id == id);
         if (lancamento == null)
         {
             return NotFound();

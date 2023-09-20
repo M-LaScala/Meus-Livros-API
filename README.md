@@ -58,4 +58,18 @@ Como fazer conversões práticas entre diferentes tipos através do AutoMapper.
 
 O Enttity consegue deduzir as Foregin keys atravez dos Modelos e a forma como aplicamos as relações.
 
+A cardinalidade de relacionamentos em bancos de dados se refere à quantidade de ocorrências que estão associadas entre duas entidades em um relacionamento.
 
+Um para Um (1:1):
+Cada registro em uma entidade está associado a exatamente um registro na outra entidade, e vice-versa. 
+É como um par exclusivo.
+
+Um para Muitos (1:N):
+Cada registro em uma entidade pode estar associado a vários registros na outra entidade,
+mas cada registro nessa outra entidade está associado a apenas um registro na primeira entidade. 
+É como um pai com vários filhos.
+
+Muitos para Muitos (N:N):
+Vários registros em uma entidade podem estar associados a vários registros na outra entidade. 
+É como uma relação de membros de clube, 
+onde cada membro pode estar em vários clubes e cada clube pode ter vários membros.

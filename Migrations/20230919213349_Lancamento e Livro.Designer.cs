@@ -3,6 +3,7 @@ using System;
 using MeusLivrosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeusLivrosAPI.Migrations
 {
     [DbContext(typeof(LivroContext))]
-    partial class LivroContextModelSnapshot : ModelSnapshot
+    [Migration("20230919213349_Lancamento e Livro")]
+    partial class LancamentoeLivro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace MeusLivrosAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Enderecos", (string)null);
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Lancamento", b =>
@@ -46,19 +49,14 @@ namespace MeusLivrosAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("LivrariaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LivroId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LivrariaId");
-
                     b.HasIndex("LivroId");
 
-                    b.ToTable("Lancamento", (string)null);
+                    b.ToTable("Lancamento");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Livraria", b =>
@@ -79,7 +77,7 @@ namespace MeusLivrosAPI.Migrations
                     b.HasIndex("EnderecoId")
                         .IsUnique();
 
-                    b.ToTable("Livrarias", (string)null);
+                    b.ToTable("Livrarias");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Livro", b =>
@@ -133,22 +131,16 @@ namespace MeusLivrosAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Livros", (string)null);
+                    b.ToTable("Livros");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Lancamento", b =>
                 {
-                    b.HasOne("MeusLivrosAPI.Models.Livraria", "Livraria")
-                        .WithMany("Lancamentos")
-                        .HasForeignKey("LivrariaId");
-
                     b.HasOne("MeusLivrosAPI.Models.Livro", "Livro")
                         .WithMany("Lacamentos")
                         .HasForeignKey("LivroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Livraria");
 
                     b.Navigation("Livro");
                 });
@@ -168,11 +160,6 @@ namespace MeusLivrosAPI.Migrations
                 {
                     b.Navigation("Livraria")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MeusLivrosAPI.Models.Livraria", b =>
-                {
-                    b.Navigation("Lancamentos");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Livro", b =>

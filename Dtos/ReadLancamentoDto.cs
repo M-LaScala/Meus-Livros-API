@@ -2,4 +2,5 @@
 
 public class ReadLancamentoDto
 {
+    public int Id { get; set; }
 }

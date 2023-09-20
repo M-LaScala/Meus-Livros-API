@@ -15,4 +15,5 @@ public class LivroContext : DbContext
     public DbSet<Livro> Livros { get; set; }
     public DbSet<Livraria> Livrarias { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
+    public DbSet<Lancamento> Lancamento { get; set; }
 }

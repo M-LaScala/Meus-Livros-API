@@ -24,5 +24,7 @@ namespace MeusLivrosAPI.Dtos
         public string? Review { get; set; }
 
         public DateTime HoraDaConsulta { get; set; } = DateTime.Now;
+
+        public ICollection<ReadLancamentoDto> Lancamentos { get; set; }
     }
 }

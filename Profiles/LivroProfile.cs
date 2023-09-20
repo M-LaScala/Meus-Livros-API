@@ -11,6 +11,8 @@ public class LivroProfile : Profile
         CreateMap<CreateLivroDto, Livro>();
         CreateMap<UpdateLivroDto, Livro>();
         CreateMap<Livro, UpdateLivroDto>();
-        CreateMap<Livro, ReadLivroDto>();
+        CreateMap<Livro, ReadLivroDto>()
+            .ForMember(LivroDto => LivroDto.Lancamentos,
+            opt => opt.MapFrom(livro => livro.Lancamentos));;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using MeusLivrosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeusLivrosAPI.Migrations
 {
     [DbContext(typeof(LivroContext))]
-    partial class LivroContextModelSnapshot : ModelSnapshot
+    [Migration("20230919232609_Lancamento e Livraria")]
+    partial class LancamentoeLivraria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace MeusLivrosAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Enderecos", (string)null);
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Lancamento", b =>
@@ -58,7 +61,7 @@ namespace MeusLivrosAPI.Migrations
 
                     b.HasIndex("LivroId");
 
-                    b.ToTable("Lancamento", (string)null);
+                    b.ToTable("Lancamento");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Livraria", b =>
@@ -79,7 +82,7 @@ namespace MeusLivrosAPI.Migrations
                     b.HasIndex("EnderecoId")
                         .IsUnique();
 
-                    b.ToTable("Livrarias", (string)null);
+                    b.ToTable("Livrarias");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Livro", b =>
@@ -133,7 +136,7 @@ namespace MeusLivrosAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Livros", (string)null);
+                    b.ToTable("Livros");
                 });
 
             modelBuilder.Entity("MeusLivrosAPI.Models.Lancamento", b =>

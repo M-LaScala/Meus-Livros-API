@@ -42,6 +42,7 @@ public class Livro
 
     public DateTime? DataDeGravacao { get; set; }
 
-    public DateTime? DataDeAlteracao { get; set; } 
-
+    public DateTime? DataDeAlteracao { get; set; }
+    
+    public virtual ICollection<Lancamento> Lancamentos { get; set; }
 }
