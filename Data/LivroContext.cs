@@ -37,7 +37,7 @@ public class LivroContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
     }
 
-    // Propriedade de acesso a base
+    // Propriedades de acesso a base
     public DbSet<Livro> Livros { get; set; }
     public DbSet<Livraria> Livrarias { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }

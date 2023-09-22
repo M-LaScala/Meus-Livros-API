@@ -24,11 +24,11 @@ public class EnderecoController : ControllerBase
     /// <summary>
     /// Obtem varios enderecos.
     /// </summary>
-    /// <param name="skip">Pular</param>
-    /// <param name="take">Pegar</param>
+    /// <param name="skip">Pular.</param>
+    /// <param name="take">Pegar.</param>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<ReadEnderecoDto> GetLivrarias([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public IEnumerable<ReadEnderecoDto> GetEndereco([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         return _mapper.Map<List<ReadEnderecoDto>>(_context.Enderecos.Skip(skip).Take(take));
     }
@@ -36,12 +36,12 @@ public class EnderecoController : ControllerBase
     /// <summary>
     /// Obtem um endereco pelo id.
     /// </summary>
-    /// <param name="id">Id do endereco</param>
+    /// <param name="id">Id do endereco.</param>
     /// <returns></returns>
     [HttpGet("{id}")]
     public IActionResult GetEnderecoPorId(int id)
     {
-        var endereco = _context.Enderecos.FirstOrDefault(x => x.Id == id);
+        var endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
         if (endereco == null)
         {
             return NotFound();
@@ -58,16 +58,14 @@ public class EnderecoController : ControllerBase
     /// </summary>
     /// <param name="enderecoDto">Objeto com o campos necessarios para a criação de um endereco.</param>
     /// <returns>IActionResult</returns>
-    /// <response code="201">Caso inserção seja feita com sucesso</response>
+    /// <response code="201">Caso inserção seja feita com sucesso.</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult CadastrarEndereco([FromBody] CreateEnderecoDto enderecoDto)
     {
         try
         {
-            // Mapeando o objeto recebido via jason para um objeto endereco
-            Endereco endereco = _mapper.Map<Endereco>(enderecoDto);
-            //endereco.DataDeGravacao = DateTime.Now;
+            var endereco = _mapper.Map<Endereco>(enderecoDto);
             _context.Enderecos.Add(endereco);
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetEnderecoPorId), new { endereco.Id }, endereco);
@@ -79,7 +77,7 @@ public class EnderecoController : ControllerBase
     }
 
     /// <summary>
-    /// Atualiza todo os campos do endereco.
+    /// Atualiza todos os campos do endereco.
     /// </summary>
     /// <param name="id">Id do endereco.</param>
     /// <param name="enderecoDto">Objeto do endereco.</param>
@@ -87,12 +85,11 @@ public class EnderecoController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
     {
-        var endereco = _context.Enderecos.FirstOrDefault(x => x.Id == id);
+        var endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
         if (endereco == null)
         {
             return NotFound();
         }
-        //endereco.DataDeAlteracao = DateTime.Now;
         _mapper.Map(enderecoDto, endereco);
         _context.SaveChanges();
         return NoContent();
@@ -107,13 +104,12 @@ public class EnderecoController : ControllerBase
     [HttpPatch("{id}")]
     public IActionResult AtualizaEnderecoParcial(int id, JsonPatchDocument<UpdateEnderecoDto> patch)
     {
-        var endereco = _context.Enderecos.FirstOrDefault(x => x.Id == id);
+        var endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
         if (endereco == null)
         {
             return NotFound();
         }
 
-        //endereco.DataDeAlteracao = DateTime.Now;
         var enderecoParaAtualizar = _mapper.Map<UpdateEnderecoDto>(endereco);
 
         patch.ApplyTo(enderecoParaAtualizar, ModelState);
@@ -136,7 +132,7 @@ public class EnderecoController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletaEndereco(int id)
     {
-        var endereco = _context.Enderecos.FirstOrDefault(x => x.Id == id);
+        var endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
         if (endereco == null)
         {
             return NotFound();

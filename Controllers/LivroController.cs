@@ -13,15 +13,6 @@ namespace MeusLivrosAPI.Controllers;
 public class LivroController : ControllerBase
 {
 
-    /* Guia de retornos:
-     * 
-     * Ok() -> 200
-     * CreatedAtAction() -> 201
-     * BadRequest() -> 400 
-     * NotFound() -> 404
-     * 
-    */
-
     private LivroContext _context;
     private IMapper _mapper;
 
@@ -34,8 +25,8 @@ public class LivroController : ControllerBase
     /// <summary>
     /// Obtem varios livros.
     /// </summary>
-    /// <param name="skip">Pular</param>
-    /// <param name="take">Pegar</param>
+    /// <param name="skip">Pular.</param>
+    /// <param name="take">Pegar.</param>
     /// <param name="nomeLivraria">Nome da livraria para o filtro.</param>
     /// <returns></returns>
     [HttpGet]
@@ -54,7 +45,7 @@ public class LivroController : ControllerBase
     /// <summary>
     /// Obtem um livro pelo id.
     /// </summary>
-    /// <param name="id">Id do livro</param>
+    /// <param name="id">Id do livro.</param>
     /// <returns></returns>
     [HttpGet("{id}")]
     public IActionResult GetLivroPorId(int id)
@@ -74,9 +65,9 @@ public class LivroController : ControllerBase
     /// <summary>
     /// Adiona um livro.
     /// </summary>
-    /// <param name="livroDto">Objeto com o campos necessarios para a criação de um livro</param>
+    /// <param name="livroDto">Objeto com o campos necessarios para a criação de um livro.</param>
     /// <returns>IActionResult</returns>
-    /// <response code="201">Caso inserção seja feita com sucesso</response>
+    /// <response code="201">Caso inserção seja feita com sucesso.</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult CadastrarLivro([FromBody] CreateLivroDto livroDto)
@@ -105,7 +96,7 @@ public class LivroController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaLivro(int id, [FromBody] UpdateLivroDto livroDto)
     {
-        var livro = _context.Livros.FirstOrDefault(x => x.id == id);
+        var livro = _context.Livros.FirstOrDefault(livro => livro.id == id);
         if (livro == null)
         {
             return NotFound();
@@ -125,7 +116,7 @@ public class LivroController : ControllerBase
     [HttpPatch("{id}")]
     public IActionResult AtualizaLivroParcial(int id, JsonPatchDocument<UpdateLivroDto> patch)
     {
-        var livro = _context.Livros.FirstOrDefault(x => x.id == id);
+        var livro = _context.Livros.FirstOrDefault(livro => livro.id == id);
         if (livro == null)
         {
             return NotFound();
@@ -154,7 +145,7 @@ public class LivroController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletaLivro(int id)
     {
-        var livro = _context.Livros.FirstOrDefault(x => x.id == id);
+        var livro = _context.Livros.FirstOrDefault(livro => livro.id == id);
         if (livro == null)
         {
             return NotFound();

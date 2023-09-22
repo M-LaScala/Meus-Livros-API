@@ -30,7 +30,7 @@ public class Livro
     [MaxLength (50)]
     public string? Genero { get; set; }
 
-    [Required(ErrorMessage = "Falta informar se foi lido ou não")]
+    [Required(ErrorMessage = "Falta informar se foi lido ou não.")]
     public bool? Lido { get; set; }
 
     [Required(ErrorMessage = "A nota é obrigatório!")]

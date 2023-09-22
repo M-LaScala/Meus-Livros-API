@@ -73,3 +73,19 @@ Muitos para Muitos (N:N):
 Vários registros em uma entidade podem estar associados a vários registros na outra entidade. 
 É como uma relação de membros de clube, 
 onde cada membro pode estar em vários clubes e cada clube pode ter vários membros.
+
+Exemplo de Json para o PATCH
+
+[
+    {
+        "op": "replace",
+        "path": "/numero",
+        "value": "332"
+    }
+]
+
+Explicar a organização das pastas e o intuito do software.
+
+FromSqlRaw() Permite colocar explicitamente uma consulta ao banco.
+
+Estudar Sobre IIS Express
