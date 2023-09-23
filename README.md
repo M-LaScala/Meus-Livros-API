@@ -1,4 +1,56 @@
-# MeusLivrosAPI
+# Meus Livros API
+
+Bem-vindo ao Projeto Meus Livros API! 
+
+Neste arquivo README, você encontrará informações úteis sobre o funcionamento do projeto.
+
+## Índice
+
+- [Sobre](#sobre)
+- [Tecnologias e Frameworks](#tecnologias-e-frameworks)
+- [Em funcionamento](#em-funcionamento)
+- [Conclusão](#conclusão)
+
+## Sobre
+
+O projeto consiste em uma API com comunicação com um banco de dados SQL
+
+## Tecnologias e Frameworks 
+
+Neste projeto, foi utilizado as seguintes tecnologias:
+
+- C# 
+- .NET 6
+- ASP .NET Core
+- Entity Framework
+- Swashbuckle / Swagger
+- Auto Mapper
+- IIS Express
+- MySql / MySql Workbench
+
+## Em funcionamento
+
+1. Clone este repositório: `git clone https://github.com/M-LaScala/Meus-Livros-API`
+2. Navegue até o diretório do projeto e abra o arquivo .SLN com o visual studio 2022+
+3. Instale os pacote NuGet dependentes
+
+![](./Assets/NuGet.png)
+
+AutoMapper => O AutoMapper é uma biblioteca de mapeamento de objetos em C# que simplifica a conversão de dados entre objetos de diferentes tipos.
+Foi utilizado para fazer o mapeamento entre as entidades do banco de dados.
+
+Swashbuckle => O Swashbuckle é uma biblioteca para ASP.NET Core que facilita a integração do Swagger em aplicativos da web, permitindo que os desenvolvedores criem e publiquem facilmente documentação para suas APIs.
+O Swagger foi utilizado para gerar a documentação da APIs de forma interativa.
+
+![](./Assets/Swagger.png)
+
+Ao executar a aplicação você irá se deparar com a documentação interativa da API do Swagger, contendo tudo o que você precisa para fazer as chamadas as APIs, lembrando que para a aplicação funcionar deve ser criado um banco de dados 
+Sinta-se à vontade para experimentar a aplicação.
+
+## Conclusão
+
+Este projeto foi construído em um único dia, com o propósito de ser um estudo prático para a geração de QR-Codes.
+O resultado final é uma aplicação simples e minimalista, que cumpre seu propósito para a geração de QR-Codes.
 
  "API" é a sigla para o termo "Application Programming Interface"
 
