@@ -8,6 +8,7 @@ Neste arquivo README, você encontrará informações úteis sobre o funcionamen
 
 - [Sobre](#sobre)
 - [Tecnologias e Frameworks](#tecnologias-e-frameworks)
+- [Preparação do ambiente](#preparação-do-ambiente)
 - [Em funcionamento](#em-funcionamento)
 - [Conclusão](#conclusão)
 
@@ -28,7 +29,7 @@ Neste projeto, foi utilizado as seguintes tecnologias:
 - IIS Express
 - MySql / MySql Workbench
 
-## Em funcionamento
+## Preparação do ambiente
 
 1. Clone este repositório: `git clone https://github.com/M-LaScala/Meus-Livros-API`
 2. Navegue até o diretório do projeto e abra o arquivo .SLN com o visual studio 2022+
@@ -36,15 +37,24 @@ Neste projeto, foi utilizado as seguintes tecnologias:
 
 ![](./Assets/NuGet.png)
 
+Entity Framework => O Entity Framework é um conjunto de tecnologias de mapeamento objeto-relacional (ORM) que permite criar uma camada de acesso a dados limpa, portátil e de alto nível com o .NET (C#) dando suporte a consultas LINQ, controle de alterações, atualizações e migrações de esquema.
+
 AutoMapper => O AutoMapper é uma biblioteca de mapeamento de objetos em C# que simplifica a conversão de dados entre objetos de diferentes tipos.
 Foi utilizado para fazer o mapeamento entre as entidades do banco de dados.
 
 Swashbuckle => O Swashbuckle é uma biblioteca para ASP.NET Core que facilita a integração do Swagger em aplicativos da web, permitindo que os desenvolvedores criem e publiquem facilmente documentação para suas APIs.
-O Swagger foi utilizado para gerar a documentação da APIs de forma interativa.
+Foi utilizado para gerar a documentação da APIs de forma interativa atraves do Swagger.
+
+IIS Express => O IIS Express (Internet Information Services Express) é um servidor web leve projetado para desenvolvedores permitindo a execução local de aplicativos web em ambiente Windows.
+Foi utilizado para subir o Swagger e API.
+
+Newtonsoft.Json => O Newtonsoft.Json - Json.NET, é uma popular biblioteca de serialização e desserialização JSON para a plataforma .NET. Ele simplifica a conversão de objetos .NET em formato JSON e vice-versa
+
+## Em funcionamento
 
 ![](./Assets/Swagger.png)
 
-Ao executar a aplicação você irá se deparar com a documentação interativa da API do Swagger, contendo tudo o que você precisa para fazer as chamadas as APIs, lembrando que para a aplicação funcionar deve ser criado um banco de dados 
+Com o ambiente preparado ao executar a aplicação você irá se deparar com a documentação interativa da API do Swagger, contendo tudo o que você precisa para fazer as chamadas as APIs, lembrando que para a aplicação funcionar deve ser criado um banco de dados 
 Sinta-se à vontade para experimentar a aplicação.
 
 ## Conclusão
